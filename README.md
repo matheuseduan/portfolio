@@ -43,25 +43,24 @@ O terminal aceita comandos reais digitados pelo usuário:
 ## 🗂️ Estrutura
 
 ```
-portfolio-main/
-├── index.html
-└── assets/
-    ├── css/
-    │   └── style.css
-    ├── js/
-    │   └── script.js
-    └── img/
-        ├── python.svg
-        ├── javascript.svg
-        ├── html5.svg
-        ├── css.svg
-        ├── git.svg
-        ├── github.svg
-        ├── github-avatar.png
-        ├── linkedin.png
-        ├── vscode.png
-        ├── windows.png
-        └── linux.png
+index.html
+assets/
+   ├── css/
+   │   └── style.css
+   ├── js/
+   │   └── script.js
+   └── img/
+       ├── python.svg
+       ├── javascript.svg
+       ├── html5.svg
+       ├── css.svg
+       ├── git.svg
+       ├── github.svg
+       ├── github-avatar.png
+       ├── linkedin.png
+       ├── vscode.png
+       ├── windows.png
+       └── linux.png
 ```
 
 ## 🛠️ Tecnologias
