@@ -1,8 +1,42 @@
+/* -------------------------------------------------------
+   Alternador de tema (claro / escuro)
+------------------------------------------------------- */
+function initTheme() {
+  const btn  = document.getElementById("theme-toggle");
+  const html = document.documentElement;
+
+  // Lê a preferência salva ou usa o sistema como fallback
+  const saved = localStorage.getItem("portfolio-theme");
+  if (saved) {
+    html.setAttribute("data-theme", saved);
+  } else {
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    html.setAttribute("data-theme", prefersDark ? "dark" : "light");
+  }
+
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    const current = html.getAttribute("data-theme");
+    const next    = current === "dark" ? "light" : "dark";
+    html.setAttribute("data-theme", next);
+    localStorage.setItem("portfolio-theme", next);
+  });
+
+  // Sincroniza se o sistema mudar enquanto a aba está aberta
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+    if (!localStorage.getItem("portfolio-theme")) {
+      html.setAttribute("data-theme", e.matches ? "dark" : "light");
+    }
+  });
+}
+
 // ===========================================================
 // Matheus Eduan — Portfólio · script.js
 // ===========================================================
 
 document.addEventListener("DOMContentLoaded", () => {
+  initTheme();
   initFooterYear();
   initTerminal();
   initContributionGraph();

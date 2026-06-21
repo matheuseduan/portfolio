@@ -1,9 +1,10 @@
 /* ===========================================================
-   Matheus Eduan — Portfólio · tema escuro inspirado no GitHub
+   Matheus Eduan — Portfólio · tema escuro (padrão) + tema claro
    =========================================================== */
 
+/* ===================== TEMA ESCURO (padrão) ===================== */
 :root {
-  /* --- Paleta (GitHub dark) --- */
+  /* --- Paleta escura (GitHub dark) --- */
   --bg: #0d1117;
   --bg-elevated: #161b22;
   --bg-elevated-2: #1c2128;
@@ -15,7 +16,7 @@
   --accent-green: #3fb950;
   --accent-green-strong: #2ea043;
 
-  /* Cores de linguagem (mesmas usadas pelo GitHub) */
+  /* Cores de linguagem */
   --lang-python: #3572A5;
   --lang-js: #f1e05a;
   --lang-html: #e34c26;
@@ -28,10 +29,50 @@
   /* --- Layout --- */
   --maxw: 980px;
   --radius: 6px;
+
+  /* Terminal escuro */
+  --terminal-bg: #010409;
+  --terminal-bar-bg: #161b22;
+  --terminal-shadow: rgba(1, 4, 9, 0.6);
+  --btn-hover-bg: #262c36;
+  --btn-hover-border: #8b949e;
+
+  /* Ícones no tema escuro: brancos */
+  --icon-filter: brightness(0) invert(1);
 }
 
-* { box-sizing: border-box; }
+/* ===================== TEMA CLARO ===================== */
+[data-theme="light"] {
+  --bg: #ffffff;
+  --bg-elevated: #f6f8fa;
+  --bg-elevated-2: #eaeef2;
+  --border: #d0d7de;
+  --border-muted: #d8dee4;
+  --text: #24292f;
+  --muted: #57606a;
+  --accent-blue: #0969da;
+  --accent-green: #2da44e;
+  --accent-green-strong: #1a7f37;
 
+  /* Cores de linguagem (iguais — já têm contraste no claro) */
+  --lang-python: #3572A5;
+  --lang-js: #c9a700;
+  --lang-html: #e34c26;
+  --lang-css: #6f42c1;
+
+  /* Terminal claro */
+  --terminal-bg: #f6f8fa;
+  --terminal-bar-bg: #eaeef2;
+  --terminal-shadow: rgba(140, 149, 159, 0.2);
+  --btn-hover-bg: #f3f4f6;
+  --btn-hover-border: #57606a;
+
+  /* Ícones no tema claro: escuros */
+  --icon-filter: brightness(0);
+}
+
+/* ===================== RESET & BASE ===================== */
+* { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
 body {
@@ -41,6 +82,7 @@ body {
   font-family: var(--font-sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
 a { color: var(--accent-blue); text-decoration: none; }
@@ -90,6 +132,7 @@ img, svg { display: block; }
   display: flex;
   gap: 4px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .topnav__link {
@@ -109,6 +152,36 @@ img, svg { display: block; }
   text-decoration: none;
 }
 
+/* ===================== BOTÃO DE TEMA ===================== */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+  padding: 0;
+}
+.theme-toggle:hover {
+  background: var(--bg-elevated-2);
+  color: var(--text);
+  border-color: var(--muted);
+}
+.theme-toggle svg { display: block; pointer-events: none; }
+
+/* Ícone lua = modo escuro visível, ícone sol = modo claro visível */
+.icon-moon { display: block !important; }
+.icon-sun  { display: none !important; }
+
+[data-theme="light"] .icon-moon { display: none !important; }
+[data-theme="light"] .icon-sun  { display: block !important; }
+
 /* ===================== HERO ===================== */
 .hero {
   max-width: var(--maxw);
@@ -125,26 +198,27 @@ img, svg { display: block; }
 
 /* --- Terminal --- */
 .terminal {
-  background: #010409;
+  background: var(--terminal-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(1, 4, 9, 0.6);
+  box-shadow: 0 8px 24px var(--terminal-shadow);
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .terminal__bar {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: var(--bg-elevated);
+  background: var(--terminal-bar-bg);
   border-bottom: 1px solid var(--border);
   padding: 10px 14px;
 }
 
 .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
-.dot--red { background: #ff5f56; }
+.dot--red    { background: #ff5f56; }
 .dot--yellow { background: #ffbd2e; }
-.dot--green { background: #27c93f; }
+.dot--green  { background: #27c93f; }
 
 .terminal__title {
   margin-left: 8px;
@@ -211,6 +285,7 @@ img, svg { display: block; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 24px;
+  transition: background 0.25s ease, border-color 0.25s ease;
 }
 
 .profile-card__avatar {
@@ -228,10 +303,7 @@ img, svg { display: block; }
   display: block;
 }
 
-.profile-card__name {
-  font-size: 20px;
-  margin: 0 0 2px;
-}
+.profile-card__name { font-size: 20px; margin: 0 0 2px; }
 
 .profile-card__handle {
   margin: 0 0 14px;
@@ -280,6 +352,11 @@ img, svg { display: block; }
   padding: 3px 10px;
 }
 
+[data-theme="light"] .topic {
+  background: rgba(9, 105, 218, 0.08);
+  border-color: rgba(9, 105, 218, 0.3);
+}
+
 .profile-card__cta { width: 100%; justify-content: center; }
 
 /* ===================== BOTÕES ===================== */
@@ -298,9 +375,9 @@ img, svg { display: block; }
   transition: background 0.15s, border-color 0.15s;
 }
 .btn:hover {
-  background: #262c36;
+  background: var(--btn-hover-bg);
   text-decoration: none;
-  border-color: #8b949e;
+  border-color: var(--btn-hover-border);
 }
 
 .btn--primary {
@@ -310,6 +387,10 @@ img, svg { display: block; }
 }
 .btn--primary:hover {
   background: var(--accent-green);
+}
+
+[data-theme="light"] .btn--primary {
+  border-color: rgba(31, 35, 40, 0.15);
 }
 
 /* ===================== SEÇÕES ===================== */
@@ -336,11 +417,12 @@ img, svg { display: block; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 20px;
+  transition: background 0.25s ease, border-color 0.25s ease;
 }
 .card p { margin: 0 0 12px; color: var(--text); font-size: 15px; }
 .card p:last-child { margin-bottom: 0; }
 
-.about-card p { color: #c9d1d9; }
+.about-card p { color: var(--text); }
 
 .lang-dot {
   width: 10px;
@@ -362,7 +444,7 @@ img, svg { display: block; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 18px;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, background 0.25s ease;
 }
 .repo-card:hover { border-color: var(--accent-blue); }
 
@@ -377,7 +459,7 @@ img, svg { display: block; }
 }
 .repo-card__title svg { color: var(--muted); }
 .repo-card__title img {
-  filter: brightness(0) invert(1);
+  filter: var(--icon-filter);
   flex-shrink: 0;
 }
 
@@ -408,7 +490,7 @@ img, svg { display: block; }
   border-radius: var(--radius);
   padding: 22px;
   text-align: center;
-  transition: transform 0.15s, border-color 0.15s;
+  transition: transform 0.15s, border-color 0.15s, background 0.25s ease;
 }
 .tool-card:hover {
   border-color: var(--accent-green);
@@ -428,7 +510,7 @@ img, svg { display: block; }
   display: block;
 }
 .tool-card h3 { margin: 0 0 6px; font-size: 15px; }
-.tool-card p { margin: 0; font-size: 13px; color: var(--muted); }
+.tool-card p  { margin: 0; font-size: 13px; color: var(--muted); }
 
 /* ----- Gráfico de uso das linguagens ----- */
 .contrib__caption {
@@ -459,7 +541,11 @@ img, svg { display: block; }
   font-size: 13px;
   color: var(--text);
 }
-.stack-usage__label img { width: 16px; height: 16px; filter: brightness(0) invert(1); }
+.stack-usage__label img {
+  width: 16px;
+  height: 16px;
+  filter: var(--icon-filter);
+}
 
 .stack-usage__cells {
   flex: 1;
@@ -486,6 +572,10 @@ img, svg { display: block; }
   font-family: var(--font-mono);
 }
 
+/* ----- Ícone LinkedIn ----- */
+.linkedin-icon { filter: none; }
+[data-theme="light"] .linkedin-icon { filter: invert(1); }
+
 /* ----- Contato ----- */
 .contact-card__links {
   display: flex;
@@ -511,11 +601,11 @@ img, svg { display: block; }
 
 /* ===================== RESPONSIVO ===================== */
 @media (max-width: 760px) {
-  .hero__grid { grid-template-columns: 1fr; }
-  .repo-grid { grid-template-columns: 1fr; }
-  .tool-grid { grid-template-columns: 1fr; }
-  .topbar__inner { flex-wrap: wrap; row-gap: 8px; }
-  .topnav { width: 100%; justify-content: space-between; }
+  .hero__grid       { grid-template-columns: 1fr; }
+  .repo-grid        { grid-template-columns: 1fr; }
+  .tool-grid        { grid-template-columns: 1fr; }
+  .topbar__inner    { flex-wrap: wrap; row-gap: 8px; }
+  .topnav           { width: 100%; justify-content: space-between; }
   .topnav__link span { display: none; }
 }
 
@@ -528,4 +618,5 @@ img, svg { display: block; }
   html { scroll-behavior: auto; }
   .caret { animation: none; opacity: 1; }
   .stack-usage__bar { transition: none; }
+  body, .terminal, .profile-card, .card, .repo-card, .tool-card { transition: none; }
 }
