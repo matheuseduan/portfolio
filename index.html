@@ -19,7 +19,7 @@
   <!-- ===== TOPBAR (estilo GitHub) ===== -->
   <header class="topbar">
     <div class="topbar__inner">
-      <a href="#topo" class="brand">
+      <a href="https://github.com/matheuseduan" class="brand" target="_blank" rel="noopener noreferrer">
         <span class="brand__icon" aria-hidden="true">
           <svg viewBox="0 0 16 16" width="22" height="22" fill="currentColor">
             <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
@@ -31,7 +31,7 @@
             .29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
           </svg>
         </span>
-        <span class="brand__name">matheus-eduan</span>
+        <span class="brand__name">matheuseduan</span>
       </a>
 
       <nav class="topnav" aria-label="Navegação principal">
@@ -158,21 +158,10 @@
         Stack
       </h2>
 
-      <!-- Barra de composição de linguagens, como o GitHub mostra em cada repositório -->
+      <!-- Gráfico de uso das linguagens -->
       <div class="card">
-        <p class="lang-bar__label">Como minha stack se distribui hoje:</p>
-        <div class="lang-bar" role="img" aria-label="Python 45%, JavaScript 30%, HTML 15%, CSS 10%">
-          <span class="lang-bar__seg" style="--w:40%; --c: var(--lang-python);"></span>
-          <span class="lang-bar__seg" style="--w:30%; --c: var(--lang-js);"></span>
-          <span class="lang-bar__seg" style="--w:15%; --c: var(--lang-html);"></span>
-          <span class="lang-bar__seg" style="--w:15%; --c: var(--lang-css);"></span>
-        </div>
-        <ul class="lang-legend">
-          <li><span class="dot-lang" style="background:var(--lang-python)"></span>Python <span class="lang-legend__pct">40%</span></li>
-          <li><span class="dot-lang" style="background:var(--lang-js)"></span>JavaScript <span class="lang-legend__pct">30%</span></li>
-          <li><span class="dot-lang" style="background:var(--lang-html)"></span>HTML <span class="lang-legend__pct">15%</span></li>
-          <li><span class="dot-lang" style="background:var(--lang-css)"></span>CSS <span class="lang-legend__pct">15%</span></li>
-        </ul>
+        <p class="contrib__caption">Como minha stack se distribui hoje</p>
+        <div class="stack-usage" id="stack-usage"></div>
       </div>
 
       <!-- Cards de linguagem, estilo "repositório" -->
@@ -180,7 +169,7 @@
 
         <article class="repo-card">
           <h3 class="repo-card__title">
-            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M2 2.5A1.5 1.5 0 0 1 3.5 1h9A1.5 1.5 0 0 1 14 2.5v11a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5v-11Z"/></svg>
+            <img src="assets/img/python.svg" alt="Python" width="22" height="22" />
             python
           </h3>
           <p class="repo-card__desc">Lógica de back-end, automação de tarefas e manipulação de dados.</p>
@@ -192,7 +181,7 @@
 
         <article class="repo-card">
           <h3 class="repo-card__title">
-            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M2 2.5A1.5 1.5 0 0 1 3.5 1h9A1.5 1.5 0 0 1 14 2.5v11a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5v-11Z"/></svg>
+            <img src="assets/img/javascript.svg" alt="JavaScript" width="22" height="22" />
             javascript
           </h3>
           <p class="repo-card__desc">Comportamento dinâmico, integração com APIs e scripts no servidor.</p>
@@ -204,7 +193,7 @@
 
         <article class="repo-card">
           <h3 class="repo-card__title">
-            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M2 2.5A1.5 1.5 0 0 1 3.5 1h9A1.5 1.5 0 0 1 14 2.5v11a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5v-11Z"/></svg>
+            <img src="assets/img/html5.svg" alt="HTML" width="22" height="22" />
             html
           </h3>
           <p class="repo-card__desc">Estrutura semântica de páginas e templates renderizados no back-end.</p>
@@ -216,7 +205,7 @@
 
         <article class="repo-card">
           <h3 class="repo-card__title">
-            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M2 2.5A1.5 1.5 0 0 1 3.5 1h9A1.5 1.5 0 0 1 14 2.5v11a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5v-11Z"/></svg>
+            <img src="assets/img/css.svg" alt="CSS" width="22" height="22" />
             css
           </h3>
           <p class="repo-card__desc">Estilização de interfaces simples para apoiar projetos back-end.</p>
@@ -301,7 +290,7 @@
             GitHub
           </a>
           <a class="btn" href="#" target="_blank" rel="noopener">
-            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M0 1.15C0 .515.52 0 1.16 0h13.68C15.48 0 16 .515 16 1.15v13.7c0 .635-.52 1.15-1.16 1.15H1.16C.52 16 0 15.485 0 14.85V1.15ZM4.74 13.4V6.17H2.4v7.23h2.34Zm-1.17-8.22c.82 0 1.33-.54 1.33-1.22-.02-.7-.51-1.22-1.31-1.22-.8 0-1.33.52-1.33 1.22 0 .68.51 1.22 1.3 1.22h.01Zm3.7 8.22V8.4c0-.3.02-.61.12-.83.26-.6.83-1.22 1.78-1.22 1.26 0 1.76.94 1.76 2.32v4.73h2.34V8.4c0-2.32-1.27-3.4-2.96-3.4-1.36 0-1.96.75-2.3 1.27v.03h-.02l.02-.03V6.17H7.66c.03.7 0 7.23 0 7.23h2.61Z"/></svg>
+            <img src="assets/img/linkedin.png" alt="LinkedIn" width="16" height="16" />
             LinkedIn
           </a>
         </div>

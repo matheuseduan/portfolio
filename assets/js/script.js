@@ -226,122 +226,50 @@ function escapeHtml(str) {
 }
 
 /* -------------------------------------------------------
-   Gráfico de contribuições — API REAL do GitHub (GraphQL)
+   Gráfico de uso das linguagens (Python, JS, HTML, CSS)
 ------------------------------------------------------- */
-const GITHUB_CONFIG = {
-  username: "matheuseduan",
-  token: "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",
-};
-
-async function initContributionGraph() {
-  const container = document.getElementById("contrib-graph");
-  const caption   = document.querySelector(".contrib__caption");
+function initContributionGraph() {
+  const container = document.getElementById("stack-usage");
   if (!container) return;
 
-  const tooltip = document.createElement("div");
-  tooltip.className = "contrib-tooltip";
-  document.body.appendChild(tooltip);
-
-  container.innerHTML = `<span class="contrib-loading">Buscando contribuições do GitHub…</span>`;
-
-  try {
-    const data = await fetchGitHubContributions(GITHUB_CONFIG.username, GITHUB_CONFIG.token);
-    renderContribGraph(container, caption, tooltip, data);
-  } catch (err) {
-    console.error("Erro ao buscar contribuições:", err);
-    container.innerHTML = `<span class="contrib-error">Não foi possível carregar as contribuições. Verifique o token.</span>`;
-    if (caption) caption.textContent = "Erro ao carregar dados do GitHub.";
-  }
-}
-
-async function fetchGitHubContributions(username, token) {
-  const query = `
-    query($username: String!) {
-      user(login: $username) {
-        contributionsCollection {
-          contributionCalendar {
-            totalContributions
-            weeks {
-              contributionDays {
-                date
-                contributionCount
-                color
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
-
-  const res = await fetch("https://api.github.com/graphql", {
-    method: "POST",
-    headers: {
-      "Authorization": `bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ query, variables: { username } }),
-  });
-
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const json = await res.json();
-  if (json.errors) throw new Error(json.errors[0].message);
-  return json.data.user.contributionsCollection.contributionCalendar;
-}
-
-function renderContribGraph(container, caption, tooltip, calendar) {
-  const { totalContributions, weeks } = calendar;
-
-  const MONTH_NAMES = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
-  const DAY_NAMES   = ["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
+  const STACK = [
+    { name: "Python",     pct: 40, color: "var(--lang-python)", icon: "assets/img/python.svg" },
+    { name: "JavaScript", pct: 30, color: "var(--lang-js)",     icon: "assets/img/javascript.svg" },
+    { name: "HTML",       pct: 15, color: "var(--lang-html)",   icon: "assets/img/html5.svg" },
+    { name: "CSS",        pct: 15, color: "var(--lang-css)",    icon: "assets/img/css.svg" },
+  ];
 
   container.innerHTML = "";
-  const fragment = document.createDocumentFragment();
+
   let delay = 0;
+  STACK.forEach((lang) => {
+    const row = document.createElement("div");
+    row.className = "stack-usage__row";
 
-  weeks.forEach((week) => {
-    week.contributionDays.forEach((day) => {
-      const cell = document.createElement("span");
-      cell.className = "cell";
-      cell.style.animationDelay = `${delay}ms`;
-      delay += 2;
+    const label = document.createElement("span");
+    label.className = "stack-usage__label";
+    label.innerHTML = `<img src="${lang.icon}" alt="${lang.name}" /> ${lang.name}`;
+    row.appendChild(label);
 
-      const count = day.contributionCount;
-      let level = 0;
-      if      (count >= 10) level = 4;
-      else if (count >= 5)  level = 3;
-      else if (count >= 2)  level = 2;
-      else if (count >= 1)  level = 1;
+    const track = document.createElement("div");
+    track.className = "stack-usage__cells";
 
-      cell.dataset.level = level;
+    const bar = document.createElement("div");
+    bar.className = "stack-usage__bar";
+    bar.style.setProperty("--c", lang.color);
+    track.appendChild(bar);
+    row.appendChild(track);
 
-      const d     = new Date(day.date + "T12:00:00");
-      const nome  = `${DAY_NAMES[d.getDay()]}, ${d.getDate()} de ${MONTH_NAMES[d.getMonth()]} de ${d.getFullYear()}`;
-      const label = count === 0 ? "Sem contribuições" : count === 1 ? "1 contribuição" : `${count} contribuições`;
+    const pct = document.createElement("span");
+    pct.className = "stack-usage__pct";
+    pct.textContent = `${lang.pct}%`;
+    row.appendChild(pct);
 
-      cell.dataset.tip = `${label} · ${nome}`;
+    container.appendChild(row);
 
-      cell.addEventListener("mouseenter", (e) => {
-        tooltip.textContent = cell.dataset.tip;
-        tooltip.classList.add("visible");
-        positionTooltip(e);
-      });
-      cell.addEventListener("mousemove", positionTooltip);
-      cell.addEventListener("mouseleave", () => tooltip.classList.remove("visible"));
-
-      fragment.appendChild(cell);
-    });
+    // Anima a barra crescendo até a porcentagem após o elemento entrar no DOM
+    const visualWidth = (lang.pct / 40) * 88;
+    setTimeout(() => { bar.style.width = `${visualWidth}%`; }, delay);
+    delay += 80;
   });
-
-  container.appendChild(fragment);
-  if (caption) caption.textContent = `${totalContributions} contribuições no último ano`;
-
-  function positionTooltip(e) {
-    const tw = tooltip.offsetWidth;
-    let left = e.clientX - tw / 2;
-    if (left < 8) left = 8;
-    if (left + tw > window.innerWidth - 8) left = window.innerWidth - tw - 8;
-    tooltip.style.left = left + "px";
-    tooltip.style.top  = (e.clientY - 44) + "px";
-  }
 }
