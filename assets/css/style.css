@@ -173,12 +173,8 @@ img, svg { display: block; }
   color: var(--text);
   border-color: var(--muted);
 }
-/* Ícone lua = visível no escuro, ícone sol = visível no claro */
-.theme-toggle .icon-moon { display: block; pointer-events: none; }
-.theme-toggle .icon-sun  { display: none;  pointer-events: none; }
-
-[data-theme="light"] .theme-toggle .icon-moon { display: none; }
-[data-theme="light"] .theme-toggle .icon-sun  { display: block; }
+/* Ícone do botão de tema gerenciado via JS (path trocado dinamicamente) */
+.theme-toggle svg { pointer-events: none; }
 
 /* ===================== HERO ===================== */
 .hero {
