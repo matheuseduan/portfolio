@@ -173,14 +173,12 @@ img, svg { display: block; }
   color: var(--text);
   border-color: var(--muted);
 }
-.theme-toggle svg { display: block; pointer-events: none; }
+/* Ícone lua = visível no escuro, ícone sol = visível no claro */
+.theme-toggle .icon-moon { display: block; pointer-events: none; }
+.theme-toggle .icon-sun  { display: none;  pointer-events: none; }
 
-/* Ícone lua = modo escuro visível, ícone sol = modo claro visível */
-.icon-moon { display: block !important; }
-.icon-sun  { display: none !important; }
-
-[data-theme="light"] .icon-moon { display: none !important; }
-[data-theme="light"] .icon-sun  { display: block !important; }
+[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+[data-theme="light"] .theme-toggle .icon-sun  { display: block; }
 
 /* ===================== HERO ===================== */
 .hero {
