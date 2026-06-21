@@ -1,4 +1,4 @@
-# ![Static Badge](https://img.shields.io/badge/dev-matheus_eduan-blue?style=for-the-badge&logo=devbox) <a href="https://matheuseduan.github.io/portfolio/" title="Portfólio"> <img src="https://img.shields.io/badge/clique_para_ver_o_projeto-portifólio-black?style=for-the-badge&logo=refinedgithub&logoColor=white&link=https://matheuseduan.github.io/portfolio/" alt="Portfólio"/></a>
+# <a href="#" title="Dev Matheus Eduan"> <img src="https://img.shields.io/badge/dev-matheus_eduan-blue?style=for-the-badge&logo=devbox" alt="Dev Matheus Eduan"/></a> <a href="https://matheuseduan.github.io/portfolio/" title="Portfólio"> <img src="https://img.shields.io/badge/clique_para_ver_o_projeto-portifólio-black?style=for-the-badge&logo=refinedgithub&logoColor=white&link=https://matheuseduan.github.io/portfolio/" alt="Portfólio"/></a>
 
 Portfólio pessoal desenvolvido em HTML, CSS e JavaScript puro, com tema escuro inspirado no GitHub.
 
