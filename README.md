@@ -4,7 +4,7 @@ Portfólio pessoal desenvolvido em HTML, CSS e JavaScript puro, com tema escuro 
 
 ## ✨ Seções
 
-- **Hero** — terminal interativo + cartão de perfil estilo GitHub
+- **Terminal** — terminal interativo + cartão de perfil estilo GitHub
 - **Sobre** — apresentação e foco profissional
 - **Stack** — gráfico de distribuição das linguagens + cards de tecnologia
 - **Ferramentas** — VS Code, Git e GitHub
