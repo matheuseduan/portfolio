@@ -43,9 +43,8 @@ O terminal aceita comandos reais digitados pelo usuário:
 ## 🗂️ Estrutura
 
 ```
-portfolio-main/
-├── index.html
-└── assets/
+index.html
+assets/
     ├── css/
     │   └── style.css
     ├── js/
